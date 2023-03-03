@@ -45,9 +45,15 @@ host_key_checking = False
 
 
 
-controller1 ansible_host=192.168.1.158
-target1 ansible_host=192.168.1.159
-target2 ansible_host=192.168.1.156
+controller1 ansible_host=192.168.1.160 ansible_ssh_pass=310783
+controller2 ansible_host=192.168.1.161 ansible_ssh_pass=310783
+target1 ansible_host=192.168.1.162 ansible_ssh_pass=310783
+target2 ansible_host=192.168.1.163 ansible_ssh_pass=310783
+
+#para el caso de dockers
+target1 ansible_host=172.17.0.2 ansible_ssh_pass=Passw0rd
+target2 ansible_host=172.17.0.3 ansible_ssh_pass=Passw0rd
+target3 ansible_host=172.17.0.4 ansible_ssh_pass=Passw0rd
 
 #permitir root usar ssh o mandar comandos ansible 
 nano /etc/ssh/sshd_config

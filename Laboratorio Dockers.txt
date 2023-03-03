@@ -22,3 +22,12 @@ docker run -it -d mmumshad/ubuntu-ssh-enabled
 
 apt install sshpass
 ansible target1 -m ping -i inventory.txt
+
+https://www.udemy.com/draft/1313828/learn/v4/t/quiz/392722
+
+
+#detener contenedores en ejecucion 
+docker stop $(docker ps -a -q)
+
+#eliminar contenedores
+docker rm $(docker ps -a -q)
