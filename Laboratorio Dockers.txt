@@ -1,0 +1,24 @@
+sudo apt update
+apt install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo apt update
+sudo apt install docker-ce docker-compose -y
+systemctl start docker
+systemctl status docker
+sudo docker run hello-world
+systemctl enable docker
+
+docker run -it -d mmumshad/ubuntu-ssh-enabled
+docker ps 
+docker inspect e4017a7c2cdd
+docker run -it -d mmumshad/ubuntu-ssh-enabled
+docker run -it -d mmumshad/ubuntu-ssh-enabled
+
+
+172.17.0.2
+172.17.0.3
+172.17.0.4
+
+apt install sshpass
+ansible target1 -m ping -i inventory.txt
