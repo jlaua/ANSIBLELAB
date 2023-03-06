@@ -1,0 +1,70 @@
+db_and_web_server1 ansible_host=192.168.1.161 ansible_ssh_pass=310783
+db_and_web_server2 ansible_host=192.168.1.163 ansible_ssh_pass=310783
+
+
+
+#playbook.yml
+- name: Deploy a web simple_web_application
+  hosts: db_and_web_server1, db_and_web_server2
+  tasks:
+    - name: Ping
+      ping: 
+
+
+
+#playbook2.yml
+- name: Deploy a web simple_web_application
+  hosts: db_and_web_server1, db_and_web_server2
+  tasks:
+    - name: Install all required dependencies
+      apt: name={{ item }} state=installed
+      with_items:
+        - python3
+        - python3-setuptools
+        - python3-dev
+        - build-essential
+        - python3-pip
+        - python3-mysqldb
+
+    - name: Install MySQL and configure database
+      apt: name={{ item }} state=installed
+      with_items:
+        - mysql-server
+        - mysql-client
+
+    - name: Iniciar MySQL service 
+      service: 
+        name: mysql
+        state: started
+        enabled: yes
+
+    - name: Create Application Database  
+      mysql_db: name=employee_db state=present
+
+    - name: Create Database User   
+      mysql_user: 
+        name: db_user
+        password: 310783
+        priv: '*.*:ALL'
+        state: present
+        host: '%' 
+
+    - name: Install Python Flask dependency   
+      pip3: 
+        name: {{ item }}
+        state: present 
+      with_items: 
+        - flask
+        - flask-mysql
+
+    - name: Copy source   
+      copy: src=app.py dest=/opt/app.py 
+
+    - name: Start web server    
+      shell: FLASK_APP=app.py nohup flash run --host=0.0.0.0 & 
+
+
+
+apt-get install -y python python-setuptools python-dev build-essential python-pip python-mysqldb
+apt-get install -y     
+apt-get install -y mysql-server mysql-client

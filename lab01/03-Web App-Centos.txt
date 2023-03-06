@@ -1,0 +1,58 @@
+The installation procedure is a bit different on Centos 7. So those of you following this course from the first course, please follow the below instructions:
+
+# Install Python Pip and dependencies on Centos 7
+
+-------------------------------------------------
+
+sudo yum install -y epel-release python python-pip
+sudo yum install -y epel-release python3 python3-pip
+
+sudo pip3 install flask flask-mysql
+
+
+sudo pip install flask flask-mysql
+
+# If you come across a certification validation error while running the above command, please use the below command.
+
+# sudo pip3 install --trusted-host files.pythonhosted.org --trusted-host pypi.org --trusted-host pypi.python.org flask flask-mysql
+trusted-host pypi.org --trusted-host pypi.python.org flask flask-mysql
+
+# Install MySQL Server on Centos 7
+
+---------------------------------------------
+
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+
+sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+
+sudo yum update
+
+sudo yum -y install mysql-server
+
+sudo service mysql start
+
+
+
+The complete playbook to get the same workin on CentOS is here:
+
+https://github.com/kodekloudhub/simple_web_application
+
+
+CREATE USER 'root'@'%' IDENTIFIED BY '310783';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+
+CREATE USER 'root'@'192.168.1.126' IDENTIFIED BY '310783';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.1.126' WITH GRANT OPTION;
+
+mysql -u root -p
+
+mysql> CREATE DATABASE employee_db;
+mysql> GRANT ALL ON *.* to db_user@'%'; IDENTIFIED BY '310783';
+
+GRANT ALL PRIVILEGES ON *.* TO db_user@'%' WITH GRANT OPTION;
+
+mysql> USE employee_db;
+mysql> CREATE TABLE employees (name VARCHAR(20));
+
+
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
